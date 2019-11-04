@@ -681,7 +681,11 @@ asn1_parser2tree (const char *file, asn1_node * definitions,
   file_name = file;
 
   /* open the file to parse */
+#ifdef __OS2__
+  file_asn1 = fopen (file, "rb");
+#else
   file_asn1 = fopen (file, "r");
+#endif
 
   if (file_asn1 == NULL)
     {
@@ -777,7 +781,11 @@ asn1_parser2array (const char *inputFileName, const char *outputFileName,
   file_name = inputFileName;
 
   /* open the file to parse */
+#ifdef __OS2__
+  file_asn1 = fopen (inputFileName, "rb");
+#else
   file_asn1 = fopen (inputFileName, "r");
+#endif
 
   if (file_asn1 == NULL)
     result_parse = ASN1_FILE_NOT_FOUND;

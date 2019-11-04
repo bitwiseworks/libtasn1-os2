@@ -85,7 +85,11 @@ _asn1_create_static_structure (asn1_node_const pointer, char *output_file_name,
   asn1_node_const p;
   unsigned long t;
 
+#ifdef __OS2__
+  file = fopen (output_file_name, "wb");
+#else
   file = fopen (output_file_name, "w");
+#endif
 
   if (file == NULL)
     return ASN1_FILE_NOT_FOUND;

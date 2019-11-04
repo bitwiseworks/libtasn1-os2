@@ -135,8 +135,13 @@ createFile (int lineNumber, const char *line)
   char lineRead[1024];
   int fileInLineNumber = 0;
 
+#ifdef __OS2__
+  fileIn = fopen (fileCorrectName, "rb");
+  fileOut = fopen (fileErroredName, "wb");
+#else
   fileIn = fopen (fileCorrectName, "r");
   fileOut = fopen (fileErroredName, "w");
+#endif
 
   while (readLine (fileIn, lineRead) != EOF)
     {
