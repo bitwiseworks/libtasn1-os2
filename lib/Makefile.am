@@ -16,6 +16,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+VENDOR ?=community
+BUILD_INFO=\#\#1\#\# $(shell date +'%d %b %Y %H:%M:%S')     $(shell uname -n)
+BUILDLEVEL_INFO=@\#$(VENDOR):$(VERSION)\#@$(BUILD_INFO)::::0::
+
 SUBDIRS = gl
 
 AM_CFLAGS = $(WARN_CFLAGS) $(WERROR_CFLAGS) $(CFLAG_VISIBILITY) $(CODE_COVERAGE_CFLAGS)
@@ -52,6 +56,7 @@ libtasn1_la_LIBADD = gl/libgnu.la
 libtasn1_la_LDFLAGS = \
 	-no-undefined \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
+	-buildlevel '$(BUILDLEVEL_INFO)' \
 	$(CODE_COVERAGE_LDFLAGS)
 
 if HAVE_LD_VERSION_SCRIPT
